@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 
-project(concrete)
+project(cement)
 
 # Generates compile_commands.json in the build dir
-set(CMAKE_EXPORT_FILE_COMMANDS 1)
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 #Enable debug target by default
 if(NOT CMAKE_BUILD_TYPE)

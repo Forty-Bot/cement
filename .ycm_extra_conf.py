@@ -7,7 +7,7 @@ from clang_helpers import PrepareClangFlags
 # more details: http://clang.llvm.org/docs/JSONCompilationDatabase.html
 # Most projects will NOT need to set this to anything; you can just change the
 # 'flags' list of compilation flags. Notice that YCM itself uses that approach.
-compilation_database_folder = 'build'
+compilation_database_folder = os.path.realpath(__file__) + 'build'
 
 # These are the compilation flags that will be used in case there's no
 # compilation database set.
