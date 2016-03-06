@@ -2,10 +2,6 @@ cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 
 project(cement C)
 
-# Generates compile_commands.json in the build dir
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
-
 #Enable debug target by default
 if(NOT CMAKE_BUILD_TYPE)
 		set(CMAKE_BUILD_TYPE "debug")
@@ -18,7 +14,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 set(LIBS)
 
 find_package(LibTCOD REQUIRED)
-include_directories(SYSTEM ${LIBTCOD_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${LIBTCOD_LIBRARIES})
 
 add_subdirectory(res)
