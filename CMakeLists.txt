@@ -13,7 +13,15 @@ endif()
 # Include extra modules
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
+# Init LIBS
+set(LIBS)
+
+find_package(LibTCOD REQUIRED)
+include_directories(${LibTCOD_INCLUDE_DIRS})
+set(LIBS ${LIBS} ${LIBTCOD_LIBRARIES})
+
 # Add c99 flag
 add_definitions(-std=c99)
 
+add_subdirectory(res)
 add_subdirectory(src)
