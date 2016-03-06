@@ -20,8 +20,5 @@ find_package(LibTCOD REQUIRED)
 include_directories(${LibTCOD_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${LIBTCOD_LIBRARIES})
 
-# Add c99 flag
-add_definitions(-std=c99)
-
 add_subdirectory(res)
 add_subdirectory(src)
