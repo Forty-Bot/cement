@@ -10,9 +10,6 @@ endif()
 # Include extra modules
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
-# Init LIBS
-set(LIBS)
-
 find_package(LibTCOD REQUIRED)
 set(LIBS ${LIBS} ${LIBTCOD_LIBRARIES})
 
