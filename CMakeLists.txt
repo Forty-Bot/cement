@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 
-project(cement C)
+project(cement CXX)
 
 #Enable debug target by default
 if(NOT CMAKE_BUILD_TYPE)
