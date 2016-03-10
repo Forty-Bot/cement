@@ -5,9 +5,9 @@
 #  LIBTCOD_LIBRARIES - The libraries needed to use LIBTCOD
 #  LIBTCOD_DEFINITIONS - Compiler switches required for using LIBTCOD
 
-find_path(LIBTCOD_INCLUDE_DIR libtcod.h PATH_SUFFIXES libtcod)
+find_path(LIBTCOD_INCLUDE_DIR libtcod.hpp PATH_SUFFIXES libtcod)
 
-find_library(LIBTCOD_LIBRARY NAMES libtcod tcod)
+find_library(LIBTCOD_LIBRARY NAMES libtcodxx tcodxx)
 
 set(LIBTCOD_LIBRARIES ${LIBTCOD_LIBRARY})
 set(LIBTCOD_INCLUDE_DIRS ${LIBTCOD_INCLUDE_DIR})
