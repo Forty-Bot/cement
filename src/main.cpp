@@ -21,9 +21,9 @@ int main(void) {
 					case 'h':
 							x--; break;
 					case 'j':
-							y--; break;
-					case 'k':
 							y++; break;
+					case 'k':
+							y--; break;
 					case 'l':
 							x++; break;
 					default:
