@@ -30,8 +30,6 @@ private:
 	int d_y;
 };
 
-class ActorC;
-
 class ActorC: public Component {
 public:
 	virtual const Action *think() = 0;
