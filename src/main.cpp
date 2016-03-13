@@ -1,3 +1,6 @@
+#include "entity.hpp"
+#include "actor.hpp"
+
 #include <libtcod/libtcod.hpp>
 
 int main(void) {
@@ -6,28 +9,33 @@ int main(void) {
 	TCODConsole::initRoot(80, 50, "Cement");
 	TCODSystem::setFps(20);
 	
-	// Position of player
-	int x = 40;
-	int y = 25;
+	// Create a player
+	Entity *player = new Entity();
+	player->display = new DisplayC(player, '@', TCODColor::white);
+	ProxyActorC *playerActor = new ProxyActorC(player);
+	player->actor = playerActor;
+	player->x = 40;
+	player->y = 25;
 	
 	// Main loop
 	while(!TCODConsole::isWindowClosed()) {
 		TCOD_key_t key;
 		TCOD_event_t ev = TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS, &key, NULL);
-		
+		int timestep = 0; 
+
 		if(ev == TCOD_EVENT_KEY_PRESS) {
 			if(key.vk == TCODK_CHAR){
 				switch(key.c) {
 					case 'h':
-							x--; break;
+						timestep = 40; playerActor->setAction(&MoveAction::West); break;
 					case 'j':
-							y++; break;
+						timestep = 40; playerActor->setAction(&MoveAction::South); break;
 					case 'k':
-							y--; break;
+						timestep = 40; playerActor->setAction(&MoveAction::North); break;
 					case 'l':
-							x++; break;
+						timestep = 40; playerActor->setAction(&MoveAction::East); break;
 					default:
-							break;
+						break;
 				}
 			} else {
 				switch(key.vk) {
@@ -39,8 +47,10 @@ int main(void) {
 			}
 		}
 		
+		player->actor->update(timestep);
+
 		TCODConsole::root->clear();
-		TCODConsole::root->setChar(x, y, '@');
+		player->display->draw(TCODConsole::root, 0, 0);
 		TCODConsole::flush();
 	}
 	return 0;
