@@ -8,7 +8,7 @@ class ActorC;
 
 class Component {
 public:
-	virtual ~Component();
+	virtual ~Component() {}
 	virtual void update(int delta) = 0;
 	Entity *getParent() {return parent;}
 protected:

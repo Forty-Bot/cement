@@ -7,7 +7,6 @@
  */
 class Action {
 public:
-	virtual ~Action();
 	int getDuration() const {return duration;};
 	virtual void execute(Entity *e) const = 0;
 protected:
