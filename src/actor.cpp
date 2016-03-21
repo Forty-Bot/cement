@@ -14,6 +14,10 @@ MoveAction const MoveAction::South(40, 0, 1);
 MoveAction const MoveAction::East (40, 1, 0);
 MoveAction const MoveAction::West (40,-1, 0);
 MoveAction const MoveAction::Wait (40, 0, 0);
+MoveAction const MoveAction::NorthEast(55, 1,-1);
+MoveAction const MoveAction::SouthEast(55, 1, 1);
+MoveAction const MoveAction::SouthWest(55,-1, 1);
+MoveAction const MoveAction::NorthWest(55,-1,-1);
 
 /* Returns true if we took an action, false if we didn't */
 void ActorC::update(int delta) {

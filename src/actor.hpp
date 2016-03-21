@@ -31,6 +31,10 @@ public:
 	static MoveAction const East;
 	static MoveAction const West;
 	static MoveAction const Wait;
+	static MoveAction const NorthEast;
+	static MoveAction const SouthEast;
+	static MoveAction const SouthWest;
+	static MoveAction const NorthWest;
 private:
 	MoveAction(int duration, int d_x, int d_y): Action(duration), d_x(d_x), d_y(d_y) {}
 	int d_x;
