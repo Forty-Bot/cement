@@ -11,7 +11,7 @@
 class Action {
 public:
 	int getDuration() const {return duration;};
-	virtual void execute(Entity *e, int base) const = 0;
+	virtual void execute(Entity *e) const = 0;
 protected:
 	Action(int duration): duration(duration) {}
 private:
@@ -24,7 +24,7 @@ private:
 class MoveAction: public Action {
 public:
 	//TODO: Add a delete operator
-	virtual void execute(Entity *e, int base) const;
+	virtual void execute(Entity *e) const;
 	// Static instances of MoveAction
 	static MoveAction const North;
 	static MoveAction const South;
@@ -69,6 +69,18 @@ class NullActorC: public ActorC {
 public:
 	virtual const Action *think();
 	NullActorC(Entity *parent): ActorC(parent) {}
+};
+
+/*
+ * This actor runs in circles forever
+ */
+class CircleActorC: public ActorC {
+public:
+	virtual const Action *think();
+	CircleActorC(Entity *parent): ActorC(parent) {}
+private:
+	// What direction we are running
+	int state = 0;
 };
 
 /*

@@ -2,11 +2,11 @@
 
 #include "entity.hpp"
 
-void MoveAction::execute(Entity *e, int base) const {	
+void MoveAction::execute(Entity *e) const {	
 	// TODO: Collision checking
 	e->x += this->d_x;
 	e->y += this->d_y;
-	e->actor->priority = base + this->getDuration();
+	e->actor->priority += this->getDuration();
 }
 
 MoveAction const MoveAction::North(40, 0,-1);
@@ -36,6 +36,28 @@ void ActorC::update(int delta) {
 
 const Action *NullActorC::think() {
 	return &MoveAction::Wait;
+}
+
+const Action *CircleActorC::think() {
+	state++;
+	switch(state % 8) {
+		case 0:
+			return &MoveAction::North;
+		case 1:
+			return &MoveAction::NorthEast;
+		case 2:
+			return &MoveAction::East;
+		case 3:
+			return &MoveAction::SouthEast;
+		case 4:
+			return &MoveAction::South;
+		case 5:
+			return &MoveAction::SouthWest;
+		case 6:
+			return &MoveAction::West;
+		case 7:
+			return &MoveAction::NorthWest;
+	}
 }
 
 const Action *ProxyActorC::think() {

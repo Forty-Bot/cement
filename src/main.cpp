@@ -50,13 +50,14 @@ void update_game(std::priority_queue<ActorC *> *world) {
 	}
 	// If there is an element left in the queue, use it as the base time
 	// This way, stuff happens chronologically
-	int base = 0;
+	/*int base = 0;
 	world->pop();
 	if(!world->empty()) {
 		ActorC *next = world->top();
 		base = next->priority;
 	}
-	action->execute(current->getParent(), base);
+	action->execute(current->getParent(), base);*/
+	action->execute(current->getParent());
 	world->push(current);
 	return;
 }
@@ -76,9 +77,17 @@ int main(void) {
 	player->x = 40;
 	player->y = 25;
 
+	// Create a mindless mob
+	Entity *mob = new Entity();
+	mob->display = new DisplayC(mob, 'c', TCODColor::yellow);
+	mob->actor = new CircleActorC(mob);
+	mob->x = 20;
+	mob->y = 20;
+	
 	// Initialize the world
 	std::priority_queue<ActorC *> actors;
 	actors.push(player->actor);
+	actors.push(mob->actor);
 	
 	// Main loop
 	while(!TCODConsole::isWindowClosed()) {
@@ -94,6 +103,7 @@ int main(void) {
 
 		TCODConsole::root->clear();
 		player->display->draw(TCODConsole::root, 0, 0);
+		mob->display->draw(TCODConsole::root, 0, 0);
 		TCODConsole::flush();
 	}
 	return 0;
