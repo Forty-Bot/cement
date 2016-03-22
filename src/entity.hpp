@@ -9,7 +9,6 @@ class ActorC;
 class Component {
 public:
 	virtual ~Component() {}
-	virtual void update(int delta) = 0;
 	Entity *getParent() {return parent;}
 protected:
 	Component(Entity *parent): parent(parent) {}
@@ -28,7 +27,6 @@ public:
 	void setCharacter(int character) {this->character = character;}
 	void setColor(TCODColor color) {this->color = color;}
 	void draw(TCODConsole *con, int offset_x, int offset_y);
-	virtual void update(int delta) {};
 private:
 	int character;
 	TCODColor color;
