@@ -14,11 +14,14 @@ struct ActorCompare {
 
 class World {
 public:
-	void add(Entity *e);
+	void add(Entity *e) { push(e->actor); }
 	// TODO: void remove(ActorC *e);
 	void update();
 private:
-	std::priority_queue<ActorC *, std::vector<ActorC *>, ActorCompare> actors;
+	void push(ActorC *a);
+	ActorC *peek() { return actors.front(); }
+	ActorC *pop();
+	std::vector<ActorC *> actors;
 };
 
 #endif // WORLD_HPP
