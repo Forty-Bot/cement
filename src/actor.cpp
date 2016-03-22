@@ -29,16 +29,6 @@ void ActorC::update(int delta) {
 	}*/
 }
 
-/*
- * Returns true if a has a lower priority than b
- * Returns false if b has a higher priority OR they have the SAME priority
- * Note that lower values of ActorC->priority == higher priority
- */
-/*bool ActorC::less(const ActorC *a, const ActorC *b) {
-	// Make sure the requisite bits are non-null
-	return a && b && a->priority > b->priority;
-}*/
-
 const Action *NullActorC::think() {
 	return &MoveAction::Wait;
 }

@@ -1,11 +1,9 @@
 #include "cement.hpp"
 #include "entity.hpp"
 #include "actor.hpp"
+#include "world.hpp"
 
 #include <libtcod/libtcod.hpp>
-
-#include <vector>
-#include <queue>
 
 InputResult handle_input(TCOD_key_t *key, TCOD_mouse_t *mouse, ProxyActorC *playerActor) {
 	if(key->vk == TCODK_CHAR){
@@ -39,24 +37,6 @@ InputResult handle_input(TCOD_key_t *key, TCOD_mouse_t *mouse, ProxyActorC *play
 	}
 }
 
-auto actor_cmp = [](const ActorC *a, const ActorC *b) {
-	return a->priority > b->priority;};	
-
-// Execute the actor at the top of the queue
-void update_game(std::priority_queue<ActorC *, std::vector<ActorC *>, decltype(actor_cmp)> *world) {
-	ActorC *current = world->top();
-	const Action *action = current->think();
-	// If the actor didn't take an action, render a frame and try again
-	// This should only happen if current->actor is a ProxyActorC
-	if(action == NULL) {
-		return;
-	}
-	world->pop();
-	action->execute(current->getParent());
-	world->push(current);
-	return;
-}
-
 int main(void) {
 	// This will all mostly get moved 
 	// Initialize the console
@@ -80,9 +60,9 @@ int main(void) {
 	mob->y = 20;
 	
 	// Initialize the world
-	std::priority_queue<ActorC *, std::vector<ActorC *>, decltype(actor_cmp)> actors(actor_cmp);
-	actors.push(player->actor);
-	actors.push(mob->actor);
+	World world;
+	world.add(player);
+	world.add(mob);
 	
 	// Main loop
 	while(!TCODConsole::isWindowClosed()) {
@@ -94,7 +74,7 @@ int main(void) {
 			return 0;
 		}
 		
-		update_game(&actors);
+		world.update();
 
 		TCODConsole::root->clear();
 		player->display->draw(TCODConsole::root, 0, 0);

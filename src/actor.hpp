@@ -45,23 +45,11 @@ class ActorC: public Component {
 public:
 	virtual const Action *think() = 0;
 	void update(int delta) final;
-	//bool less(const ActorC *a, const ActorC *b);
 	// The priority (low numbers==high priority) this entity has in the actors queue
 	int priority;
 protected:
 	ActorC(Entity *parent): Component(parent),priority(0)  {}
-private:
-	Action const *current = &MoveAction::Wait;
 };
-
-namespace std {
-	template<> struct less<ActorC> {
-		bool operator()(const ActorC *a, const ActorC *b) const {return a->priority > b->priority;}
-		typedef ActorC first_argument_type;
-		typedef ActorC second_argument_type;
-		typedef bool result_type;
-	};
-}
 
 /*
  * This actor does nothing.
@@ -98,6 +86,5 @@ public:
 private:
 	Action const *next = &MoveAction::Wait;
 };
-
 
 #endif // ACTOR_HPP
