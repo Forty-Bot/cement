@@ -45,6 +45,7 @@ class ActorC: public Component {
 public:
 	virtual const Action *think() = 0;
 	void update(int delta) final;
+	//bool less(const ActorC *a, const ActorC *b);
 	// The priority (low numbers==high priority) this entity has in the actors queue
 	int priority;
 protected:
@@ -55,7 +56,7 @@ private:
 
 namespace std {
 	template<> struct less<ActorC> {
-		bool operator()(const ActorC *a, const ActorC *b) const {return a->priority >= b->priority;}
+		bool operator()(const ActorC *a, const ActorC *b) const {return a->priority > b->priority;}
 		typedef ActorC first_argument_type;
 		typedef ActorC second_argument_type;
 		typedef bool result_type;

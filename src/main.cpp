@@ -39,8 +39,11 @@ InputResult handle_input(TCOD_key_t *key, TCOD_mouse_t *mouse, ProxyActorC *play
 	}
 }
 
+auto actor_cmp = [](const ActorC *a, const ActorC *b) {
+	return a->priority > b->priority;};	
+
 // Execute the actor at the top of the queue
-void update_game(std::priority_queue<ActorC *> *world) {
+void update_game(std::priority_queue<ActorC *, std::vector<ActorC *>, decltype(actor_cmp)> *world) {
 	ActorC *current = world->top();
 	const Action *action = current->think();
 	// If the actor didn't take an action, render a frame and try again
@@ -48,15 +51,7 @@ void update_game(std::priority_queue<ActorC *> *world) {
 	if(action == NULL) {
 		return;
 	}
-	// If there is an element left in the queue, use it as the base time
-	// This way, stuff happens chronologically
-	/*int base = 0;
 	world->pop();
-	if(!world->empty()) {
-		ActorC *next = world->top();
-		base = next->priority;
-	}
-	action->execute(current->getParent(), base);*/
 	action->execute(current->getParent());
 	world->push(current);
 	return;
@@ -85,7 +80,7 @@ int main(void) {
 	mob->y = 20;
 	
 	// Initialize the world
-	std::priority_queue<ActorC *> actors;
+	std::priority_queue<ActorC *, std::vector<ActorC *>, decltype(actor_cmp)> actors(actor_cmp);
 	actors.push(player->actor);
 	actors.push(mob->actor);
 	

@@ -1,6 +1,9 @@
 #ifndef CEMENT_HPP
 #define CEMENT_HPP
 
+#include <algorithm>
+#include <vector>
+
 /* 
  * This enum is returned by handle_input
  */
