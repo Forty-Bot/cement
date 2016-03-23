@@ -44,7 +44,7 @@ private:
 class ActorC: public Component {
 public:
 	virtual const Action *think() = 0;
-	void update(int delta) final;
+	void update(int delta);
 	// The priority (low numbers==high priority) this entity has in the actors queue
 	int priority;
 protected:

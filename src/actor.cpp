@@ -19,14 +19,8 @@ MoveAction const MoveAction::SouthEast(55, 1, 1);
 MoveAction const MoveAction::SouthWest(55,-1, 1);
 MoveAction const MoveAction::NorthWest(55,-1,-1);
 
-/* Returns true if we took an action, false if we didn't */
 void ActorC::update(int delta) {
-	/*cooldown -= delta;
-	if(cooldown < 0) {
-		current = think();
-		current->execute(getParent());
-		cooldown += current->getDuration();
-	}*/
+	priority -= delta;
 }
 
 const Action *NullActorC::think() {
@@ -51,6 +45,7 @@ const Action *CircleActorC::think() {
 		case 6:
 			return &MoveAction::West;
 		case 7:
+		default:
 			return &MoveAction::NorthWest;
 	}
 }

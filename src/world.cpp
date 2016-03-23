@@ -17,6 +17,11 @@ void World::update() {
 		return;
 	}
 	pop();
+	// Decrement everything by the priority of the current actor
+	// This keeps the ints at reasonable values
+	for(ActorC *a: actors) {
+		a->update(current->priority);
+	}
 	action->execute(current->getParent());
 	push(current);
 	return;
