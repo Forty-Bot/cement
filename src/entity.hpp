@@ -1,7 +1,7 @@
 #ifndef ENTITY_HPP
 #define ENTITY_HPP
 
-#include <libtcod/libtcod.hpp>
+#include "libtcod.hpp"
 
 class Entity;
 class ActorC;

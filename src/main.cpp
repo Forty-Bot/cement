@@ -3,7 +3,7 @@
 #include "actor.hpp"
 #include "world.hpp"
 
-#include <libtcod/libtcod.hpp>
+#include "libtcod.hpp"
 
 #include "lua.hpp"
 

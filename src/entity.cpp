@@ -1,7 +1,7 @@
 #include "entity.hpp"
 #include "actor.hpp"
 
-#include <libtcod/libtcod.hpp>
+#include "libtcod.hpp"
 
 void DisplayC::draw(TCODConsole *con, int offset_x, int offset_y) {
 	int x = getParent()->x + offset_x;
