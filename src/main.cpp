@@ -5,6 +5,8 @@
 
 #include <libtcod/libtcod.hpp>
 
+#include "lua.hpp"
+
 typedef TCODConsole con;
 typedef TCODSystem sys;
 
