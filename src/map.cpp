@@ -10,7 +10,7 @@ Tile const Tile::Wall (false, TCODColor(  0,   0, 100));
 void Map::draw(TCODConsole *con, int offset_x, int offset_y) {
 	for(int i = 0; i < width; i++) {
 		for(int j = 0; j < height; j++) {
-			get(i, j)->draw(con, i + offset_x, j + offset_y);
+			get(i, j).draw(con, i + offset_x, j + offset_y);
 		}
 	}
 }
@@ -18,7 +18,7 @@ void Map::draw(TCODConsole *con, int offset_x, int offset_y) {
 Map::~Map() {
 	for(int i = 0; i < width; i++) {
 		for(int j = 0; j < height; j++) {
-			delete get(i, j);
+			delete &get(i, j);
 		}
 	}
 	delete[] tiles;

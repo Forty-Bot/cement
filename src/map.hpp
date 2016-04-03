@@ -9,8 +9,8 @@
  * A tile in a map
  */
 struct Tile {
-	const bool walkable;
-	const TCODColor color;
+	bool walkable;
+	TCODColor color;
 
 	static Tile const Wall;
 	static Tile const Floor;
@@ -22,7 +22,7 @@ struct Tile {
 class Map {
 public:
 	const int width, height;
-	Tile *get(int x, int y) {return &tiles[x + width * y];}
+	Tile &get(int x, int y) {return tiles[x + width * y];}
 	void draw(TCODConsole *con, int offset_x, int offset_y);
 	~Map();
 	Map(int width, int height, Tile *tiles): width(width), height(height), tiles(tiles) {}
