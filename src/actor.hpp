@@ -69,7 +69,7 @@ public:
 	CircleActorC(Entity *parent): ActorC(parent) {}
 private:
 	// What direction we are running
-	int state = 0;
+	int state = -1;
 };
 
 /*
@@ -84,7 +84,7 @@ public:
 	Action const *getAction() {return next;}
 	ProxyActorC(Entity *parent): ActorC(parent) {}
 private:
-	Action const *next = &MoveAction::Wait;
+	Action const *next = NULL;
 };
 
 #endif // ACTOR_HPP

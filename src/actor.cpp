@@ -6,6 +6,7 @@ void MoveAction::execute(Entity *e) const {
 	// TODO: Collision checking
 	e->x += this->d_x;
 	e->y += this->d_y;
+		
 	e->actor->priority += this->getDuration();
 }
 
