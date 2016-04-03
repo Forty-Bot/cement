@@ -39,8 +39,8 @@ private:
  */
 class EntityDisplayC: public DisplayC, public Component {
 public:
-	EntityDisplayC(Entity *parent, int character, TCODColor color): Component(parent), DisplayC(),
-		character(character), color(color) {}
+	EntityDisplayC(Entity *parent, int character, TCODColor color): DisplayC(), Component(parent),
+		color(color), character(character) {}
 	void setColor(TCODColor color) {this->color = color;}
 	void setCharacter(int character) {this->character = character;}
 	virtual void draw(TCODConsole *con);

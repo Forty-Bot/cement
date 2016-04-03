@@ -7,9 +7,6 @@
 #include <queue>
 #include <vector>
 
-Tile const Tile::Floor(true , TCODColor( 50, 50, 100));
-Tile const Tile::Wall (false, TCODColor(  0,  0, 150));
-
 // Execute the actor at the top of the queue
 void World::update() {
 	ActorC *current = peek();

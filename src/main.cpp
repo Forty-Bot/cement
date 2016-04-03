@@ -2,6 +2,7 @@
 #include "entity.hpp"
 #include "actor.hpp"
 #include "world.hpp"
+#include "map.hpp"
 
 #include "libtcod.hpp"
 
@@ -68,6 +69,9 @@ int main(void) {
 	World world;
 	world.add(player);
 	world.add(mob);
+
+	// Create the map
+	Map *map = BareMap(80, 50);
 	
 	// Main loop
 	while(!con::isWindowClosed()) {
@@ -82,6 +86,7 @@ int main(void) {
 		world.update();
 
 		con::root->clear();
+		map->draw(con::root, 0, 0);
 		player->display->draw(con::root);
 		mob->display->draw(con::root);
 		con::flush();

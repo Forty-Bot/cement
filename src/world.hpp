@@ -7,20 +7,6 @@
 #include <queue>
 #include <vector>
 
-/*
- * A tile is a bit of floor in a map
- */
-class Tile {
-public:
-	bool walkable;
-	TCODColor color;
-	static Tile const Wall;
-	static Tile const Floor;
-	virtual void draw(TCODConsole *con, int x, int y) {con->setCharBackground(x, y, color);}
-private:
-	Tile(bool walkable, TCODColor color): walkable(walkable), color(color) {}
-};
-
 struct ActorCompare {
 	bool operator()	(const ActorC *a, const ActorC *b) const {
 		return a->priority > b->priority;
