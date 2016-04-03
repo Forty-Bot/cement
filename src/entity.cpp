@@ -3,9 +3,9 @@
 
 #include "libtcod.hpp"
 
-void DisplayC::draw(TCODConsole *con, int offset_x, int offset_y) {
-	int x = getParent()->x + offset_x;
-	int y = getParent()->y + offset_y;
+void EntityDisplayC::draw(TCODConsole *con) {
+	int x = getParent()->x + getOffsetX();
+	int y = getParent()->y + getOffsetY();
 	con->setCharForeground(x, y, this->color);
 	con->setChar(x, y, this->character);
 }

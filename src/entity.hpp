@@ -20,16 +20,30 @@ private:
  * The display component draws an entity onto the screen (or doesn't) depending on the properties of the
  * entity.
  */
-class DisplayC: public Component {
+class DisplayC {
 public:
-	DisplayC(Entity *parent, int character, TCODColor color): Component(parent), character(character),
-		color(color) {}
-	void setCharacter(int character) {this->character = character;}
-	void setColor(TCODColor color) {this->color = color;}
-	void draw(TCODConsole *con, int offset_x, int offset_y);
+	void setOffset(int x, int y) {offset_x = x; offset_y = y;}
+	int getOffsetX() {return offset_x;}
+	int getOffsetY() {return offset_y;}
+	virtual void draw(TCODConsole *con) = 0;
+	virtual ~DisplayC() {}
+protected:
+	DisplayC(): offset_x(0), offset_y(0) {} 
 private:
-	int character;
+	int offset_x;
+	int offset_y;
+};
+
+class EntityDisplayC: public DisplayC, public Component {
+public:
+	EntityDisplayC(Entity *parent, int character, TCODColor color): Component(parent), DisplayC(),
+		character(character), color(color) {}
+	void setColor(TCODColor color) {this->color = color;}
+	void setCharacter(int character) {this->character = character;}
+	virtual void draw(TCODConsole *con);
+private:
 	TCODColor color;
+	int character;
 };
 
 /*
@@ -42,7 +56,7 @@ public:
 	int x;
 	int y;
 	ActorC *actor;
-	DisplayC *display;
+	EntityDisplayC *display;
 	//CombatC *combat;
 	~Entity();
 };

@@ -51,7 +51,7 @@ int main(void) {
 	
 	// Create a player
 	Entity *player = new Entity();
-	player->display = new DisplayC(player, '@', TCODColor::white);
+	player->display = new EntityDisplayC(player, '@', TCODColor::white);
 	ProxyActorC *playerActor = new ProxyActorC(player);
 	player->actor = playerActor;
 	player->x = 40;
@@ -59,7 +59,7 @@ int main(void) {
 
 	// Create a mindless mob
 	Entity *mob = new Entity();
-	mob->display = new DisplayC(mob, 'c', TCODColor::yellow);
+	mob->display = new EntityDisplayC(mob, 'c', TCODColor::yellow);
 	mob->actor = new CircleActorC(mob);
 	mob->x = 20;
 	mob->y = 20;
@@ -82,8 +82,8 @@ int main(void) {
 		world.update();
 
 		con::root->clear();
-		player->display->draw(con::root, 0, 0);
-		mob->display->draw(con::root, 0, 0);
+		player->display->draw(con::root);
+		mob->display->draw(con::root);
 		con::flush();
 	}
 	return 0;
