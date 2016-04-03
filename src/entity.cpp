@@ -6,8 +6,8 @@
 void EntityDisplayC::draw(TCODConsole *con) {
 	int x = getParent()->x + getOffsetX();
 	int y = getParent()->y + getOffsetY();
-	con->setCharForeground(x, y, this->color);
-	con->setChar(x, y, this->character);
+	con->setCharForeground(x, y, color);
+	con->setChar(x, y, character);
 }
 
 Entity::~Entity() {

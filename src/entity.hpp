@@ -17,7 +17,7 @@ private:
 };
 
 /*
- * The display component draws an entity onto the screen (or doesn't) depending on the properties of the
+ * The display component draws something onto the screen (or doesn't) depending on the properties of the
  * entity.
  */
 class DisplayC {
@@ -34,6 +34,9 @@ private:
 	int offset_y;
 };
 
+/*
+ * Display component of an Entity.
+ */
 class EntityDisplayC: public DisplayC, public Component {
 public:
 	EntityDisplayC(Entity *parent, int character, TCODColor color): Component(parent), DisplayC(),
