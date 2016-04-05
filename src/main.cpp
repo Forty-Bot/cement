@@ -33,14 +33,13 @@ int main(void) {
 	mob->x = 20;
 	mob->y = 20;
 	
-	// Initialize the world
-	World world;
-	world.add(player);
-	world.add(mob);
-
 	// Create the map
 	Map *map = BareMap(80, 50);
 	map->get(22, 18) = Tile::Wall;
+	
+	// Initialize the world
+	World *world = new World(player, map);
+	world->add(mob);
 	
 	// Main loop
 	while(!con::isWindowClosed()) {
@@ -52,7 +51,7 @@ int main(void) {
 			return 0;
 		}
 		
-		world.update();
+		world->update();
 
 		con::root->clear();
 		map->draw(con::root, 0, 0);

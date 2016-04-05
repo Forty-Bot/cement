@@ -4,8 +4,17 @@
 #include "actor.hpp"
 
 #include <algorithm>
-#include <queue>
 #include <vector>
+
+std::vector<Entity *> World::getEnts(int x, int y) {
+	std::vector<Entity *> results;
+	for(Entity * i: ents) {
+		if(i->x == x && i->y == y) {
+			results.push_back(i);
+		}
+	}
+	return results;
+}
 
 // Execute the actor at the top of the queue
 void World::update() {
