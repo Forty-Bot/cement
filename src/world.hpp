@@ -4,25 +4,21 @@
 #include "actor.hpp"
 #include "entity.hpp"
 
-#include <queue>
-#include <vector>
+#include <set>
 
-struct ActorCompare {
-	bool operator()	(const ActorC *a, const ActorC *b) const {
-		return a->priority > b->priority;
+struct EntityCompare {
+	bool operator()	(const Entity *a, const Entity *b) const {
+		return a->actor->priority < b->actor->priority;
 	}
 };
 
 class World {
 public:
-	void add(Entity *e) { push(e->actor); }
-	// TODO: void remove(ActorC *e);
 	void update();
+	void add(Entity *e) { ents.insert(e); }
+	bool remove(Entity *e);
 private:
-	void push(ActorC *a);
-	ActorC *peek() { return actors.front(); }
-	ActorC *pop();
-	std::vector<ActorC *> actors;
+	std::multiset<Entity *, EntityCompare> ents;
 };
 
 #endif // WORLD_HPP
