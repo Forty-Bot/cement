@@ -14,18 +14,22 @@ struct Tile {
 
 	static Tile const Wall;
 	static Tile const Floor;
+	// Draw a tile to the screen
 	void draw(TCODConsole *con, int x, int y) {con->setCharBackground(x, y, color);}
-	static void operator delete(void *ptr, std::size_t sz) {};
+	// Prevent static tiles from being deleted
+	static void operator delete(void *ptr, std::size_t sz);
 	Tile(const bool walkable, const TCODColor color): walkable(walkable), color(color) {}
 };
 
 class Map {
 public:
 	const int width, height;
-	Tile &get(int x, int y) {return tiles[x + width * y];}
+	Map(int width, int height, Tile *tiles): width(width), height(height), tiles(tiles) {}
+	// Get a tile at coordinates
+	Tile &get(int x, int y) const {return tiles[x + width * y];}
+	// Draw the whole map
 	void draw(TCODConsole *con, int offset_x, int offset_y);
 	~Map();
-	Map(int width, int height, Tile *tiles): width(width), height(height), tiles(tiles) {}
 private:
 	Tile *tiles;
 };

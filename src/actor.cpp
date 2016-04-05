@@ -46,7 +46,6 @@ const Action *CircleActorC::think() {
 		case 6:
 			return &MoveAction::West;
 		case 7:
-		default:
 			return &MoveAction::NorthWest;
 	}
 }

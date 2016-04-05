@@ -7,6 +7,12 @@
 Tile const Tile::Floor(true , TCODColor( 50,  50, 150));
 Tile const Tile::Wall (false, TCODColor(  0,   0, 100));
 
+void Tile::operator delete(void *ptr, std::size_t sz) {
+	if(ptr != &Tile::Floor || ptr != &Tile::Wall) {
+		::operator delete(ptr);
+	}
+}
+
 void Map::draw(TCODConsole *con, int offset_x, int offset_y) {
 	for(int i = 0; i < width; i++) {
 		for(int j = 0; j < height; j++) {
