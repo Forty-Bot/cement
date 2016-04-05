@@ -3,8 +3,11 @@
 
 #include "libtcod.hpp"
 
+// This header is integral to pretty much everything in the game
+// As such, we can't include any other headers to prevent circular dependancies
 class Entity;
 class ActorC;
+class World;
 
 class Component {
 public:
@@ -51,7 +54,7 @@ private:
 
 /*
  * An entity is something in the world. It can be inanimate or a creature, have stats or not, or hold other
- * entities. Each of these optionals is abstracted away by a component. In fact, entitties are mainly just
+ * entities. Each of these optionals is abstracted away by a component. In fact, entities are mainly just
  * containers for other behaviors.
  */
 class Entity{
@@ -60,6 +63,7 @@ public:
 	int y;
 	ActorC *actor;
 	EntityDisplayC *display;
+	World *world;
 	//CombatC *combat;
 	~Entity();
 };

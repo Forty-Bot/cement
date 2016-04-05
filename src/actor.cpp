@@ -1,11 +1,16 @@
 #include "actor.hpp"
 
 #include "entity.hpp"
+#include "world.hpp"
 
 void MoveAction::execute(Entity *e) const {	
-	// TODO: Collision checking
-	e->x += this->d_x;
-	e->y += this->d_y;
+	int x = e->x + this->d_x;
+	int y = e->y + this->d_y;
+
+	if(e->world->map->get(x, y).walkable) {
+		e->x = x;
+		e->y = y;
+	}
 		
 	e->actor->priority += this->getDuration();
 }

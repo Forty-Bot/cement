@@ -17,7 +17,11 @@ int main(void) {
 	con::setCustomFont("res/dejavu16x16_gs_tc.png", TCOD_FONT_LAYOUT_TCOD | TCOD_FONT_TYPE_GREYSCALE);
 	con::initRoot(80, 50, "Cement");
 	sys::setFps(20);
-	
+
+	// Create the map
+	Map *map = BareMap(80, 50);
+	map->get(22, 18) = Tile::Wall;
+
 	// Create a player
 	Entity *player = new Entity();
 	player->display = new EntityDisplayC(player, '@', TCODColor::white);
@@ -26,21 +30,19 @@ int main(void) {
 	player->x = 40;
 	player->y = 25;
 
+	// Initialize the world
+	World *world = new World(player, map);
+	player->world = world;
+	
 	// Create a mindless mob
 	Entity *mob = new Entity();
 	mob->display = new EntityDisplayC(mob, 'c', TCODColor::yellow);
 	mob->actor = new CircleActorC(mob);
 	mob->x = 20;
 	mob->y = 20;
-	
-	// Create the map
-	Map *map = BareMap(80, 50);
-	map->get(22, 18) = Tile::Wall;
-	
-	// Initialize the world
-	World *world = new World(player, map);
+	mob->world = world;
 	world->add(mob);
-	
+
 	// Main loop
 	while(!con::isWindowClosed()) {
 		TCOD_key_t key;
