@@ -7,9 +7,10 @@
 
 find_path(LIBTCOD_INCLUDE_DIR libtcod.hpp PATH_SUFFIXES libtcod)
 
-find_library(LIBTCOD_LIBRARY NAMES libtcodxx tcodxx)
+find_library(LIBTCOD_CXX_LIBRARY NAMES libtcodxx tcodxx)
+find_library(LIBTCOD_C_LIBRARY NAMES libtcod tcod)
 
-set(LIBTCOD_LIBRARIES ${LIBTCOD_LIBRARY})
+set(LIBTCOD_LIBRARIES ${LIBTCOD_CXX_LIBRARY} ${LIBTCOD_C_LIBRARY})
 set(LIBTCOD_INCLUDE_DIRS ${LIBTCOD_INCLUDE_DIR})
 
 include(FindPackageHandleStandardArgs)
