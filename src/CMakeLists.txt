@@ -15,6 +15,10 @@ find_package(Lua REQUIRED)
 include_directories(${LUA_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${LUA_LIBRARIES})
 
+# Find Eigen
+find_package(Eigen3 REQUIRED)
+include_directories(${EIGEN3_INCLUDE_DIR})
+
 target_link_libraries(${executable_name} ${LIBS})
 
 # Set the standard to C++11
