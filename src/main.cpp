@@ -3,10 +3,13 @@
 #include "world.hpp"
 #include "map.hpp"
 #include "ui.hpp"
+#include "bunker-generator.hpp"
 
 #include "libtcod.hpp"
 
 #include "lua.hpp"
+
+#include <ctime>
 
 typedef TCODConsole con;
 typedef TCODSystem sys;
@@ -18,30 +21,25 @@ int main(void) {
 	con::initRoot(80, 50, "Cement");
 	sys::setFps(20);
 
-	// Create the map
-	Map *map = BareMap(80, 50);
-	map->get(22, 18) = Tile::Wall;
-
 	// Create a player
 	Entity *player = new Entity();
 	player->display = new EntityDisplayC(player, '@', TCODColor::white);
 	ProxyActorC *playerActor = new ProxyActorC(player);
 	player->actor = playerActor;
-	player->x = 40;
-	player->y = 25;
 
 	// Initialize the world
-	World *world = new World(player, map);
+	World *world = bunker::generate(player, 80, 50, time(NULL));
 	player->world = world;
-	
+	Map *map = world->map; 
+
 	// Create a mindless mob
-	Entity *mob = new Entity();
+	/*Entity *mob = new Entity();
 	mob->display = new EntityDisplayC(mob, 'c', TCODColor::yellow);
 	mob->actor = new CircleActorC(mob);
 	mob->x = 20;
 	mob->y = 20;
 	mob->world = world;
-	world->add(mob);
+	world->add(mob);*/
 
 	// Main loop
 	while(!con::isWindowClosed()) {
@@ -58,7 +56,7 @@ int main(void) {
 		con::root->clear();
 		map->draw(con::root, 0, 0);
 		player->display->draw(con::root);
-		mob->display->draw(con::root);
+		//mob->display->draw(con::root);
 		con::flush();
 	}
 	return 0;

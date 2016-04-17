@@ -13,6 +13,44 @@ void Tile::operator delete(void *ptr, std::size_t sz) {
 	}
 }
 
+bool Map::valid(int x, int y, int w, int h) {
+	if(!valid(x, y) || w < 1 || h < 1) {
+		return false;
+	}
+	if(!valid(x + w - 1, y + h - 1)) {
+		return false;
+	}
+	return true;
+}
+
+bool Map::unwalkable(int x, int y, int w, int h) {
+	if(!valid(x, y, w, h)) {
+		return false;
+	}
+
+	for(int i = x; i < x + w; i++) {
+		for(int j = y; j < y + h; j++) {
+			if(get(i, j).walkable) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+bool Map::makeRectangle(int x, int y, int w, int h, const Tile *t) {
+	if(!valid(x, y, w, h)) {
+		return false;
+	}
+
+	for(int i = x; i < x + w; i++) {
+		for(int j = y; j < y + h; j++) {
+			new (&get(i, j)) Tile(t);
+		}
+	}
+	return true;
+}
+
 void Map::draw(TCODConsole *con, int offset_x, int offset_y) {
 	for(int i = 0; i < width; i++) {
 		for(int j = 0; j < height; j++) {
